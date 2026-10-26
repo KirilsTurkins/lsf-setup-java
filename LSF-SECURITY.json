@@ -1,0 +1,157 @@
+{
+  "upstream": "actions/setup-java",
+  "revision": "b843ebf9b913146b38da2eaa7aeddf76074ae1ad",
+  "upstreamArchiveSha256": "1e109afa484b0c93b8d34254b4af3cd0a9130f38b541703927cb95087c86143c",
+  "undici": "6.29.1",
+  "productionPackages": 44,
+  "osvFindingCount": 0,
+  "tests": {
+    "suites": 45,
+    "passed": 1566,
+    "upstreamSkipped": 2,
+    "platform": "Linux",
+    "node": "24.19.0"
+  },
+  "build": "pass",
+  "bundledEventSourceGuards": "present in rebuilt setup/cleanup entries; absent from upstream entries",
+  "files": {
+    "dist/cleanup/314.index.js": {
+      "bytes": 8487,
+      "sha256": "882aacc9b87ce00446d0df5127acce4e2bb0fcae911ca634402e52af083f977c"
+    },
+    "dist/cleanup/348.index.js": {
+      "bytes": 11074,
+      "sha256": "6163c4d2046f2fe97bba190d1ebf35d44a3194eb407efa64a23e4cac9562e10d"
+    },
+    "dist/cleanup/377.index.js": {
+      "bytes": 17805,
+      "sha256": "988fab9b9a3d88983ae46585ef4fcd8789319628bd926eef1cc5780dffd2e27b"
+    },
+    "dist/cleanup/767.index.js": {
+      "bytes": 2337352,
+      "sha256": "9828ea91eba274a00b3fe96e6a89b9c98e1a4d2411cabca5096679faad91ee14"
+    },
+    "dist/cleanup/index.js": {
+      "bytes": 1218262,
+      "sha256": "a80e9a57c660b86e26f33ff4eb9d82dd21fc1b1e9e86f56356a7c81940d74199"
+    },
+    "dist/cleanup/package.json": {
+      "bytes": 23,
+      "sha256": "3ca9d4afd21425087cf31893b8f9f63c81b0b8408db5e343ca76e5f8aa26ab9a"
+    },
+    "dist/setup/126.index.js": {
+      "bytes": 8426,
+      "sha256": "d9ca917dffacd0de4704d9567bc5b672d8dbeb7599972ae378e908dea1ced9e0"
+    },
+    "dist/setup/151.index.js": {
+      "bytes": 7208,
+      "sha256": "cfc36bc9ae32cea017592fc9f55ddc56e12d6ef5655104f9800786c9d687601b"
+    },
+    "dist/setup/172.index.js": {
+      "bytes": 3567,
+      "sha256": "d97ffbee7e072785fc9cbc9a56da9311822a3800e3a54dfbdbbc17da03d36ba8"
+    },
+    "dist/setup/182.index.js": {
+      "bytes": 6888,
+      "sha256": "2bde9316c15170e54a2e703042d8fd8e8e83b9a382a5407503c58c1a877d90bb"
+    },
+    "dist/setup/19.index.js": {
+      "bytes": 7195,
+      "sha256": "a9b8e22af8ad997f6cf83d295ef787c4d4e2268e5339f7b1a7502e7cd802a835"
+    },
+    "dist/setup/220.index.js": {
+      "bytes": 14797,
+      "sha256": "23d14c752e98a86557825aadccaff09d3d63889259d93cdec6da96622cdde23b"
+    },
+    "dist/setup/228.index.js": {
+      "bytes": 7116,
+      "sha256": "1cc508880c4794d49958af0d0814b6a98fcd7eb78e75c47b2013126d9acaf498"
+    },
+    "dist/setup/242.index.js": {
+      "bytes": 36379,
+      "sha256": "4394f4f95d106ee56632602b73158f1ea8fda9ddffdf4f6f6f921ec3f16d362c"
+    },
+    "dist/setup/282.index.js": {
+      "bytes": 10658,
+      "sha256": "5aef95056e63c7d6e9b1608b63ff4cc1d4e2c82191bd27c37d76e2f461052f26"
+    },
+    "dist/setup/348.index.js": {
+      "bytes": 11341,
+      "sha256": "c9bf5ed1cfbc455d81d2edcf553bc6acff5225b146f05a23ddfef5160165967e"
+    },
+    "dist/setup/377.index.js": {
+      "bytes": 17539,
+      "sha256": "0f10c93f4cda22d0e6bb841b99db20d78c2612fa53cd1d1c3e664d4f55a6f42b"
+    },
+    "dist/setup/394.index.js": {
+      "bytes": 1312,
+      "sha256": "bdfed6826bb054943dcd0d8ecb48cf94a9b08c459b930195a5117e6d7e52caa6"
+    },
+    "dist/setup/451.index.js": {
+      "bytes": 12915,
+      "sha256": "fa703b9b3110667235cb8007c19970a4f9ac7d495749042527c388063418b0ec"
+    },
+    "dist/setup/463.index.js": {
+      "bytes": 22075,
+      "sha256": "eaa1bd236349251278437d0f0f659e80715067208e98f39d0c4cee13babd9f69"
+    },
+    "dist/setup/524.index.js": {
+      "bytes": 7914,
+      "sha256": "97dfcb29cd9ec2ccd5942d09fb5fc8afbf12473cdd4feefe5a52111d391c0bbc"
+    },
+    "dist/setup/557.index.js": {
+      "bytes": 10626,
+      "sha256": "27c0d4629df9c2277c1c4910cead5f605360de7b9f85a8aa6ca7bec544091394"
+    },
+    "dist/setup/63.index.js": {
+      "bytes": 7804,
+      "sha256": "7aea60bd60de911af56bfad5691074f16a1b4f3875048816ecbf1618efbeeeae"
+    },
+    "dist/setup/675.index.js": {
+      "bytes": 10111,
+      "sha256": "c9e257c2e5d79b81d3554aff24beddfca16dea79df9ef5ad15a5140a83ec1075"
+    },
+    "dist/setup/735.index.js": {
+      "bytes": 6842,
+      "sha256": "fce6c904c36a449d92459bd95f674a0dbd9af6959d79b2ab9e62ced5261c241f"
+    },
+    "dist/setup/779.index.js": {
+      "bytes": 10675,
+      "sha256": "fc4672244c7d99ffd909b70742588bb4adec66078e4ae9744cf96a8a3d7f2e45"
+    },
+    "dist/setup/81.index.js": {
+      "bytes": 28233,
+      "sha256": "0f74c074a51a703f7bb9b7d4ee78921b7103b12eea503e3e86a97e3b0641f137"
+    },
+    "dist/setup/824.index.js": {
+      "bytes": 230474,
+      "sha256": "36810199d5cb45b8a9bc44cebcfc44d86b943af4475194d8416daa6d2e17b28c"
+    },
+    "dist/setup/939.index.js": {
+      "bytes": 9237,
+      "sha256": "11a7826ee0de93fe27833c39b809e2ad3c30299d72d2573603147448534fdb34"
+    },
+    "dist/setup/968.index.js": {
+      "bytes": 19697,
+      "sha256": "e4f8762823b6d09d39bbfc09c7dcb00d2f1bfdfc68cd35c98fe920f194329688"
+    },
+    "dist/setup/971.index.js": {
+      "bytes": 2110544,
+      "sha256": "8c0e7bfbe188cf5248a687836c99920f4d5839ba351af24cb1b6bef34e32371c"
+    },
+    "dist/setup/978.index.js": {
+      "bytes": 10978,
+      "sha256": "93e2cc8d8f7f74838a426f5d3ba3a13b027be4c8f2b11bb3d1ee4eb6c90bf852"
+    },
+    "dist/setup/index.js": {
+      "bytes": 1251705,
+      "sha256": "ff49684899199004e6e3380d810250c997a7cb048e3745da83fda98f453e9676"
+    },
+    "dist/setup/package.json": {
+      "bytes": 23,
+      "sha256": "3ca9d4afd21425087cf31893b8f9f63c81b0b8408db5e343ca76e5f8aa26ab9a"
+    }
+  },
+  "buildPlatform": "Linux",
+  "buildImage": "node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df"
+}
