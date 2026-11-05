@@ -54241,6 +54241,7 @@ class Minimatch {
     // **/*/<rest> -> */**/<rest> <== not valid because ** doesn't follow
     // this WOULD be allowed if ** did follow symlinks, or * didn't
     firstPhasePreProcess(globParts) {
+        const { braceExpandMax = 100_000 } = this.options;
         let didSomething = false;
         do {
             didSomething = false;
@@ -54268,7 +54269,8 @@ class Minimatch {
                         p === '..' ||
                         !p2 ||
                         p2 === '.' ||
-                        p2 === '..') {
+                        p2 === '..' ||
+                        globParts.length >= braceExpandMax) {
                         continue;
                     }
                     didSomething = true;
@@ -54325,6 +54327,7 @@ class Minimatch {
     // {<pre>/**/<rest>,<pre>/**/<p>/<rest>} -> <pre>/**/<rest>
     // ^-- not valid because ** doens't follow symlinks
     secondPhasePreProcess(globParts) {
+        if (globParts.length > 1000) return globParts;
         for (let i = 0; i < globParts.length - 1; i++) {
             for (let j = i + 1; j < globParts.length; j++) {
                 const matched = this.partsMatch(globParts[i], globParts[j], !this.preserveMultipleSlashes);
