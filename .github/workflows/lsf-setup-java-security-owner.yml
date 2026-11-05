@@ -1,0 +1,79 @@
+name: LSF setup-java matcher source owner
+on:
+  push:
+    branches:
+      - diag/20261105-setup-java-security-owner
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      SOURCE_COMMIT: 10dfad9fb7484f2f1b39c5b50ffa86f9e56d8f63
+      SOURCE_TREE: da1077784074c8a0e949947c4607452c36574dc1
+      EVIDENCE: /tmp/lsf-setup-java-source-evidence
+    steps:
+      - uses: KirilsTurkins/lsf-checkout@4d310727149d3abacc52b5dcb0a1c4d18b345d13
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify candidate and diagnostic-only overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$EVIDENCE"
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git rev-parse HEAD^)" = "$SOURCE_COMMIT"
+          test "$(git rev-parse "${SOURCE_COMMIT}^{tree}")" = "$SOURCE_TREE"
+          test "$(git diff --name-only "$SOURCE_COMMIT" HEAD)" = .github/workflows/lsf-setup-java-security-owner.yml
+          git rev-parse HEAD "$SOURCE_COMMIT" "${SOURCE_COMMIT}^{tree}" | tee "$EVIDENCE/source-identities.txt"
+      - uses: KirilsTurkins/lsf-setup-node@fdae00b14e855eb751452bc70c64dde286270415
+        with:
+          node-version: 24.19.0
+      - name: Install and check the locked dependency graph
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(node --version)" = v24.19.0
+          test "$(npm --version)" = 11.17.0
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm ls --all > "$EVIDENCE/npm-ls.txt"
+      - name: Verify installed sources and rebuild runtime chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          node .lsf-source/verify-installed-deepmerge.mjs | tee "$EVIDENCE/installed-deepmerge.json"
+          node .lsf-source/verify-installed-minimatch.mjs | tee "$EVIDENCE/installed-minimatch.json"
+          npm run build 2>&1 | tee "$EVIDENCE/build.log"
+          git diff --exit-code "$SOURCE_COMMIT" -- dist/setup dist/cleanup
+          sha256sum dist/setup/index.js dist/cleanup/index.js dist/setup/971.index.js dist/cleanup/767.index.js | tee "$EVIDENCE/runtime-sha256.txt"
+      - name: Run source and refusal controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run test:security-source 2>&1 | tee "$EVIDENCE/source-tests.log"
+      - name: Run existing Java action tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test -- --silent 2>&1 | tee "$EVIDENCE/jest.log"
+      - name: Retain exact source and rebuilt outputs
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$EVIDENCE"
+          for file in action.yml package.json package-lock.json dist/setup/index.js dist/cleanup/index.js dist/setup/971.index.js dist/cleanup/767.index.js .lsf-source/deepmerge-4.3.1-lsf-prototype-v1.repair.json .lsf-source/deepmerge-4.3.1-lsf-prototype-v1.source.json .lsf-source/deepmerge-4.3.1-lsf-prototype-v1.tar .lsf-source/verify-installed-deepmerge.mjs .lsf-source/minimatch-10.2.6.original.tgz .lsf-source/minimatch-10.2.6-lsf-bound-v1.tar .lsf-source/minimatch-10.2.6-lsf-bound-v1.repair.json .lsf-source/verify-installed-minimatch.mjs .lsf-source/minimatch-bounds.test.mjs; do
+            if test -f "$file"; then mkdir -p "$EVIDENCE/$(dirname "$file")"; cp "$file" "$EVIDENCE/$file"; fi
+          done
+          (cd "$EVIDENCE" && find . -type f -print0 | sort -z | xargs -0 sha256sum > /tmp/lsf-setup-java-source-sha256.txt)
+          cp /tmp/lsf-setup-java-source-sha256.txt "$EVIDENCE/SHA256SUMS"
+      - uses: KirilsTurkins/lsf-upload-artifact@5c42799caf30eda69cb2db5da0be2400c47cef16
+        if: always()
+        with:
+          name: lsf-setup-java-security-source-evidence
+          path: /tmp/lsf-setup-java-source-evidence
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 7
